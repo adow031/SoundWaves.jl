@@ -77,11 +77,7 @@ function getTempo()
     return parse(Int, get(ENV, "tempo", "100"))
 end
 
-function mixNotes(
-    notes::Vector{Symbol},
-    durations::Vector,
-    deltas::Vector{<:Real} = ones(length(notes)),
-)
+function mixNotes(notes::Vector{Symbol}, durations::Vector)
     result = Tuple{Symbol,Vararg{Real}}[]
     for i in eachindex(notes)
         if typeof(durations[i]) <: Real
