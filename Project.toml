@@ -1,0 +1,17 @@
+name = "SoundWaves"
+uuid = "b232f49d-d503-4f01-8f2d-251e93facde6"
+authors = ["Anthony Downward"]
+version = "0.1.0"
+
+[deps]
+WAV = "8149f6b0-98f6-5db9-b78f-408fbbb8ef88"
+
+[compat]
+WAV = "1"
+julia = "1.6"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
