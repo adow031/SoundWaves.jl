@@ -79,12 +79,18 @@ end
 
 function mixNotes(
     notes::Vector{Symbol},
-    durations::Vector{<:Real},
+    durations::Vector,
     deltas::Vector{<:Real} = ones(length(notes)),
 )
     result = Tuple{Symbol,Vararg{Real}}[]
     for i in eachindex(notes)
-        push!(result, (notes[i], durations[i], deltas[1]))
+        if typeof(durations[i]) <: Real
+            push!(result, (notes[i], durations[i]))
+        elseif typeof(durations[i]) <: Tuple{<:Real,<:Real}
+            push!(result, (notes[i], durations[i][1], durations[i][2]))
+        else
+            error("Invalid duration")
+        end
     end
     return result
 end
