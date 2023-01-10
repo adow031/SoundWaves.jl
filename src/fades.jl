@@ -1,4 +1,5 @@
 function ramp(tr, type = :cubic)
+    fs = getHz()
     t = 0.0:1/fs:prevfloat(float(tr))
 
     if type == :linear
@@ -35,6 +36,7 @@ function symmetric_ramp(y, r)
 end
 
 function applyfadeout(y, k)
+    fs = getHz()
     f = 1:length(y)
     f = exp.(-k / fs * f)
     return y = y .* f

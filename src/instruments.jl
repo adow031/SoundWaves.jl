@@ -8,6 +8,8 @@ mutable struct Instrument
 end
 
 function makeSound(frequency, amplitude, duration, wavetype)
+    fs = getHz()
+
     t = 0.0:1/fs:prevfloat(float(duration))
 
     if wavetype[1] == :sine
@@ -51,6 +53,9 @@ function triangular(x, p)
 end
 
 function makeNote(note, dur, instrument::Instrument)
+    tempo = getTempo()
+    fs = getHz()
+
     default_duration = 60 / tempo * instrument.duration
     r1 = ramp(
         min(default_duration * 2.0^dur * 0.4, instrument.ramps[1][1]),
@@ -71,7 +76,6 @@ function makeNote(note, dur, instrument::Instrument)
             instrument.amplitude * h[2],
             default_duration * 2.0^dur,
         )
-        #snd += makeSound(freq*h[1],instrument.amplitude*h[2],default_duration*2.0^dur,instrument[5])
     end
     snd = applyfadeout(snd, instrument.fade)
     snd = applyrampup(snd, r1)
